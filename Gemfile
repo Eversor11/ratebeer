@@ -46,6 +46,9 @@ end
 
 group :development, :test do
 	gem 'sqlite3'
+	gem 'byebug'
+	gem 'web-console', '~> 2.0'
+	gem "better_errors"
 end
 
 group :production do

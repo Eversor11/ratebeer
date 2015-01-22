@@ -1,0 +1,42 @@
+irb(main):005:0> b = Brewery.new name:"BrewDog", year:2007
+=> #<Brewery id: nil, name: "BrewDog", year: 2007, created_at: nil, updated_at: nil>
+irb(main):006:0> b.save
+   (0.1ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "breweries" ("created_at", "name", "updated_at", "year") VALUES (?, ?, ?, ?)  [["created_at", Thu, 22 Jan 2015 08:50:04 UTC +00:00], ["name", "BrewDog"], ["updated_at", Thu, 22 Jan 2015 08:50:04 UTC +00:00], ["year", 2007]]
+   (4.7ms)  commit transaction
+=> true
+irb(main):007:0> olut = Beer.new name:"Punk IPA", style:"IPA"
+=> #<Beer id: nil, name: "Punk IPA", style: "IPA", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):008:0> b.beers << olut
+   (0.1ms)  begin transaction
+  SQL (0.8ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Thu, 22 Jan 2015 08:54:33 UTC +00:00], ["name", "Punk IPA"], ["style", "IPA"], ["updated_at", Thu, 22 Jan 2015 08:54:33 UTC +00:00]]
+   (6.0ms)  commit transaction
+  Beer Load (0.2ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 5]]
+=> #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: 5, created_at: "2015-01-22 08:54:33", updated_at: "2015-01-22 08:54:33">]>
+irb(main):009:0> olut.ratings.create score:5
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 14], ["created_at", Thu, 22 Jan 2015 08:55:52 UTC +00:00], ["score", 5], ["updated_at", Thu, 22 Jan 2015 08:55:52 UTC +00:00]]
+   (5.4ms)  commit transaction
+=> #<Rating id: 4, score: 5, beer_id: 14, created_at: "2015-01-22 08:55:52", updated_at: "2015-01-22 08:55:52">
+irb(main):010:0> olut.ratings.create score:6
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 14], ["created_at", Thu, 22 Jan 2015 08:56:02 UTC +00:00], ["score", 6], ["updated_at", Thu, 22 Jan 2015 08:56:02 UTC +00:00]]
+   (6.6ms)  commit transaction
+=> #<Rating id: 5, score: 6, beer_id: 14, created_at: "2015-01-22 08:56:02", updated_at: "2015-01-22 08:56:02">
+irb(main):011:0> olut = Beer.new name:"Nanny State", style:"lowalcohol"
+=> #<Beer id: nil, name: "Nanny State", style: "lowalcohol", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):012:0> b.beers << olut
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Thu, 22 Jan 2015 08:57:42 UTC +00:00], ["name", "Nanny State"], ["style", "lowalcohol"], ["updated_at", Thu, 22 Jan 2015 08:57:42 UTC +00:00]]
+   (6.2ms)  commit transaction
+=> #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: 5, created_at: "2015-01-22 08:54:33", updated_at: "2015-01-22 08:54:33">, #<Beer id: 15, name: "Nanny State", style: "lowalcohol", brewery_id: 5, created_at: "2015-01-22 08:57:42", updated_at: "2015-01-22 08:57:42">]>
+irb(main):013:0> olut.ratings.create score:26
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 15], ["created_at", Thu, 22 Jan 2015 08:58:09 UTC +00:00], ["score", 26], ["updated_at", Thu, 22 Jan 2015 08:58:09 UTC +00:00]]
+   (5.1ms)  commit transaction
+=> #<Rating id: 6, score: 26, beer_id: 15, created_at: "2015-01-22 08:58:09", updated_at: "2015-01-22 08:58:09">
+irb(main):014:0> olut.ratings.create score:43
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 15], ["created_at", Thu, 22 Jan 2015 08:58:22 UTC +00:00], ["score", 43], ["updated_at", Thu, 22 Jan 2015 08:58:22 UTC +00:00]]
+   (5.9ms)  commit transaction
+=> #<Rating id: 7, score: 43, beer_id: 15, created_at: "2015-01-22 08:58:22", updated_at: "2015-01-22 08:58:22">
