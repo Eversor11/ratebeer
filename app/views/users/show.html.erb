@@ -6,7 +6,10 @@
 	<% if @user.ratings.empty? %>
 		Has not yet made ratings!
 	<% else %>
-		Has made <%= pluralize(@user.ratings.count, "rating") %>, average <%= @user.average_rating %>
+		Has made <%= pluralize(@user.ratings.count, "rating") %>, average <%= @user.average_rating %><br><br>
+		User's favorite beer: <strong><%= @user.favorite_beer %></strong><br>
+		User's favorite style: <strong><%= @user.favorite_style %></strong><br>
+		User's favorite brewery: <strong><%= @user.favorite_brewery %></strong><br>
 	<% end %>
 </p>
 
@@ -39,4 +42,3 @@
 	<%= link_to 'Edit', edit_user_path(@user) %>
 	<%= link_to 'Close account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', users_path %>

@@ -1,3 +1,0 @@
-== README
-
-https://protected-beach-6794.herokuapp.com/breweries

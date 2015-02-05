@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.0.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: TIoQSibH2qig9xraqm15FJJZAIwv+47+pfReVqXzGyi+JwWPqsbmeC2GQGWsYmhL7681QT7YY0WwmLwfESWun0Mu6+vNzNFDqW3ggNpFUng1SlLYGSmZ/McM74p1CycWhKAMGDGYBpVw1jeXdeoburEcK2bBXKK1MuOxrox1ctA=
+  app: protected-beach-6794
+  on:
+    repo: Eversor11/ratebeer
+  run: "rake db:migrate"
