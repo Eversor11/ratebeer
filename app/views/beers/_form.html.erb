@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :style %><br>
-    <%= f.select :style, options_for_select(@styles) %>
+    <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :to_s, selected: @beer.style_id) %>
   </div>
   <div class="field">
     <%= f.label :brewery %><br>
-    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s) %>
+    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s, selected: @beer.brewery_id) %>
   </div>
   <div class="actions">
     <%= f.submit %>

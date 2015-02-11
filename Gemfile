@@ -9,6 +9,8 @@ gem 'rails', '4.0.2'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bcrypt-ruby'
 
+gem 'httparty'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -61,6 +63,7 @@ group :test do
 	gem 'capybara'
 	gem 'launchy'
 	gem 'simplecov', require: false
+	gem 'webmock'
 end
 
 group :production do

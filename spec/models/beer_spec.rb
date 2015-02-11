@@ -5,7 +5,9 @@ describe Beer do
 		BeerClub
 		BeerClubsController
 		MembershipsController
-		beer = Beer.create name:"Kalja", style:"Iso"
+		StylesController
+
+		beer = Beer.create name:"Kalja", style:FactoryGirl.create(:style)
 
 		expect(beer).to be_valid
 		expect(Beer.count).to eq(1)
@@ -13,7 +15,7 @@ describe Beer do
 
 	describe "is not saved when" do
 		it "name doesn't exist" do
-			beer = Beer.create style:"Iso"
+			beer = Beer.create style:FactoryGirl.create(:style)
 
 			expect(beer).not_to be_valid
 			expect(Beer.count).to eq(0)

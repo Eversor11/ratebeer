@@ -16,7 +16,8 @@ describe "User" do
 
 	it "favorites are shown on user's page" do
 		brewery = FactoryGirl.create(:brewery, name:"Kontula")
-		beer = FactoryGirl.create(:beer, name:"Juhlajuoma", style:"Iso", brewery:brewery)
+		style = FactoryGirl.create(:style, name:"Iso")
+		beer = FactoryGirl.create(:beer, name:"Juhlajuoma", style:style, brewery:brewery)
 		FactoryGirl.create(:rating, score:25, beer:beer, user:user)
 
 		visit user_path(user)
