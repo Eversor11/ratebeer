@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
 		return nil if ratings.empty?
 		beers.group(:brewery).order("average_score desc").average(:score).keys[0]
 	end
+
+	def self.top(n)
+		sorted_by_rating_in_desc_order = self.all.sort_by{ |b| -(b.ratings.count||0) }
+		sorted_by_rating_in_desc_order[0..n-1]
+	end
 end

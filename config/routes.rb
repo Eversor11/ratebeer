@@ -5,11 +5,15 @@ Ratebeer::Application.routes.draw do
 
   resources :beer_clubs
 
-  resources :users
-
   resources :beers
 
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+
+  resources :users do
+    post 'toggle_frozn', on: :member
+  end
 
   resource :session, only: [:new, :create, :delete]
 

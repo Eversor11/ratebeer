@@ -6,6 +6,9 @@ class Brewery < ActiveRecord::Base
 									 only_integer: true}
 	validate :year_cannot_be_in_the_future
 
+	scope :active, -> { where active:true }
+	scope :retired, -> { where active:[nil, false] }
+
 	has_many :beers, dependent: :destroy
 	has_many :ratings, through: :beers
 
@@ -13,6 +16,11 @@ class Brewery < ActiveRecord::Base
 		if year > Date.today.year
 			errors.add(:year, "can't be in the future")
 		end
+	end
+
+	def self.top(n)
+		sorted_by_rating_in_desc_order = self.all.sort_by{ |b| -(b.average_rating||0) }
+		sorted_by_rating_in_desc_order[0..n-1]
 	end
 
 	def to_s

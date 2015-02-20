@@ -11,6 +11,8 @@ gem 'bcrypt-ruby'
 
 gem 'httparty'
 
+gem 'bootstrap-sass'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -48,6 +50,10 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development do
+	gem 'rails_layout'
+end
 
 group :development, :test do
 	gem 'sqlite3'
