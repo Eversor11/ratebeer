@@ -1,15 +1,25 @@
 Ratebeer::Application.routes.draw do
   resources :styles
 
-  resources :memberships
+  resources :memberships do
+    post 'activate', on: :member
+  end
 
   resources :beer_clubs
 
   resources :beers
 
+  get 'auth/:provider/callback', to:'sessions#create_oauth'
+
+  get 'ngbeerlist', to:'beers#nglist'
+
+  get 'beerlist', to:'beers#list'
+
   resources :breweries do
     post 'toggle_activity', on: :member
   end
+
+  get 'brewerylist', to:'breweries#list'
 
   resources :users do
     post 'toggle_frozn', on: :member

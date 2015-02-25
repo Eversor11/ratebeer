@@ -24,6 +24,17 @@
 	</ul>
 <% end %>
 
+<% if @user.outstanding_club_applications.any? %>
+	<p>
+		<strong>Applied membership of</strong>
+		<ul>
+		<% @user.outstanding_club_applications.each do |club| %>
+			<li><%= link_to club.name, club %></li>
+		<% end %>
+		</ul>
+	<p>
+<% end %>
+
 <h3>Ratings</h3>
 
 <% if @user.ratings.empty? %>

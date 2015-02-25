@@ -1,5 +1,7 @@
 <h2>Rating statistics</h2>
 
+<% cache 'ratings', expires_in:10.minutes do %>
+
 <div class="row">
 	<div class="col-md-4">
 		<h3>Best beers</h3>
@@ -48,3 +50,5 @@
 		<li><%= rating %> <%= link_to rating.user.username, rating.user %></li>
 	<% end %>
 </ul>
+
+<% end %>

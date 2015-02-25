@@ -1,4 +1,4 @@
-https://protected-beach-6794.herokuapp.com/breweries
+http://protected-beach-6794.herokuapp.com
 
 [![Build Status](https://travis-ci.org/Eversor11/ratebeer.png)](https://travis-ci.org/Eversor11/ratebeer)
 

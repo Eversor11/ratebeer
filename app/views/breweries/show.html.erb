@@ -1,3 +1,5 @@
+<% cache @brewery do %>
+
 <h2><%= @brewery.name %>
 	<% if not @brewery.active %>
 		<span class="label label-info">Retired</span>
@@ -23,6 +25,8 @@
 		Has <%= pluralize(@brewery.ratings.count, "rating") %>, average <%= round(@brewery.average_rating) %>
 	<% end %>
 <p>
+
+<% end %>
 
 <%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class:"btn btn-primary" %>
 <%= edit_and_destroy_buttons(@brewery) %>

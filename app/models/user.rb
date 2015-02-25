@@ -12,7 +12,12 @@ class User < ActiveRecord::Base
 	has_many :ratings, dependent: :destroy
 	has_many :beers, through: :ratings
 	has_many :memberships, dependent: :destroy
-	has_many :beer_clubs, through: :memberships
+
+	has_many :confirmed_memberships, ->{ where confirmed:true }, class_name: 'Membership'
+	has_many :applications, ->{ where confirmed:[nil, false] }, class_name: 'Membership'
+
+	has_many :beer_clubs, through: :confirmed_memberships
+	has_many :outstanding_club_applications, through: :applications, source: :beer_club
 
 	def favorite_beer
 		return nil if ratings.empty?

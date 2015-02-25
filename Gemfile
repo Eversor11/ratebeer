@@ -9,6 +9,12 @@ gem 'rails', '4.0.2'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bcrypt-ruby'
 
+gem 'jquery-turbolinks'
+
+gem 'rack-mini-profiler'
+
+gem 'omniauth-github'
+
 gem 'httparty'
 
 gem 'bootstrap-sass'
@@ -70,6 +76,8 @@ group :test do
 	gem 'launchy'
 	gem 'simplecov', require: false
 	gem 'webmock'
+	gem 'selenium-webdriver'
+	gem 'database_cleaner'
 end
 
 group :production do

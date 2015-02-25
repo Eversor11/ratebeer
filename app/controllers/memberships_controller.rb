@@ -1,6 +1,12 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
+  def activate
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, true
+    redirect_to :back, notice: "Membership successfully confirmed"
+  end
+
   # GET /memberships
   # GET /memberships.json
   def index
@@ -27,6 +33,7 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(membership_params)
     @membership.user = current_user
+    @membership.confirmed = false
 
     respond_to do |format|
       if @membership.save
@@ -72,6 +79,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id, :user_id)
+      params.require(:membership).permit(:beer_club_id, :user_id, :confirmed)
     end
 end

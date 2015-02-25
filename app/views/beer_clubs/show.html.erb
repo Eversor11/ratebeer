@@ -9,19 +9,33 @@
 	<% end %>
 </ul>
 
+<% if @beer_club.members.include? current_user %>
+	<% unless @beer_club.applications.first.nil? %>
+		<h3>Outstanding applications</h3>
+		<ul>
+			<% @beer_club.applications.each do |application| %>
+				<li><%= link_to application.user.username, application.user %> <%= link_to 'Confirm', activate_membership_path(application), method: :post, class:"btn btn-primary" %></li>
+			<% end %>
+		</ul>
+	<% end %>
+<% end %>
+
 <% if current_user %>
-	<% unless @beer_club.members.include? current_user %>
+	<% if @beer_club.members.include? current_user or @beer_club.applicants.include? current_user %>
+		<%= form_for(@membership, method: "delete") do |f| %>
+      		<%= f.hidden_field :beer_club_id %>
+      		<% if @membership.confirmed %>
+      			<%= f.submit value: "End the membership", class:"btn btn-danger" %>
+      		<% else %>
+      			<%= f.submit value: "Retract the application", class:"btn btn-danger" %>
+      		<% end %>
+   		<% end %>		
+	<% else %>
 		<%= form_for(@membership) do |f| %>
 			<%= f.hidden_field :beer_club_id %>
 			<%= f.submit value:"Join the club", class:"btn btn-primary" %>
 		<% end %>
-	<% else %>
-		<%= form_for(@membership, method: "delete") do |f| %>
-      		<%= f.hidden_field :beer_club_id %>
-      		<%= f.submit value: "End the membership", class:"btn btn-danger" %>
-   		<% end %>
 	<% end %>
-
 <% end %>
 
 <%= edit_and_destroy_buttons(@beer_club) %>
